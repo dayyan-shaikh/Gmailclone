@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between mx-3 h-16">
       <div className="flex items-center gap-10 px-5">
         <div className="flex items-center gap-3">
-          <div className="p5 hover:bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center">
+          <div className="p-1 hover:bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center">
             <RxHamburgerMenu size={'20'}/>
           </div>
           <img

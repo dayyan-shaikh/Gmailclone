@@ -1,6 +1,6 @@
 import React from "react";
 import { LuPencil } from "react-icons/lu";
-import { MdInbox, MdMore, MdOutlineDrafts, MdOutlineWatchLater,} from "react-icons/md";
+import { MdInbox, MdMore, MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater,} from "react-icons/md";
 import { IoMdStarOutline } from "react-icons/io";
 import { TbSend2 } from "react-icons/tb";
 
@@ -26,7 +26,7 @@ const sidebarItems = [
     text: "Drafts",
   },
   {
-    icon: <MdMore size={"22px"} />,
+    icon: <MdOutlineKeyboardArrowDown size={"22px"} />,
     text: "More",
   },
 ];
@@ -40,7 +40,7 @@ const Sidebar = () => {
           Compose
         </button>
       </div>
-      <div className="text-gray-500">
+      <div className="text-gray-600">
         {sidebarItems.map((item, index) => {
           return (
             <div className="flex items-center px-10 gap-6 my-3 rounded-r-full hover:cursor-pointer hover:bg-gray-300">
