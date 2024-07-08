@@ -1,26 +1,26 @@
 import "./App.css";
 import Inbox from "./components/Inbox";
 import Navbar from "./components/Navbar";
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./components/Body";
 import Mail from "./components/Mail";
 
 const appRouter = createBrowserRouter([
   {
-    path:"/",
-    element:<Body/>,
-    children:[
+    path: "/",
+    element: <Body />,
+    children: [
       {
-        path:"/",
-        element:<Inbox/>
+        path: "/",
+        element: <Inbox />,
       },
       {
-        path:"/",
-        element:<Mail/>
-      }
-    ]
-  }
-])
+        path: "/mail/:mailId",
+        element: <Mail />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
