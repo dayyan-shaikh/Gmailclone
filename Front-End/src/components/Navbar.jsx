@@ -22,12 +22,12 @@ const Navbar = () => {
           <h1 className="text-2xl">Gmail</h1>
         </div>
       </div>
-      <div className="w-[40%] mr-60">
+      <div className="w-[50%] mr-64">
         <div className="flex items-center bg-[#EAF1FB] px-2 py-3 rounded-full">
           <CiSearch size={"24px"} className="text-gray-700 hover:cursor-pointer" />
           <input
             type="text"
-            placeholder="Search Email"
+            placeholder="Search mail"
             className="rounded-full w-full bg-transparent outline-none px-1"
           />
         </div>
