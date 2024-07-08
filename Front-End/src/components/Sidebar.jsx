@@ -1,6 +1,6 @@
 import React from "react";
 import { LuPencil } from "react-icons/lu";
-import { MdInbox, MdMore, MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater,} from "react-icons/md";
+import { MdInbox, MdOutlineDrafts, MdOutlineKeyboardArrowDown, MdOutlineWatchLater,} from "react-icons/md";
 import { IoMdStarOutline } from "react-icons/io";
 import { TbSend2 } from "react-icons/tb";
 
