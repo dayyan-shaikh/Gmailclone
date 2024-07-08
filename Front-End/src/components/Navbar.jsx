@@ -24,7 +24,7 @@ const Navbar = () => {
       </div>
       <div className="w-[40%] mr-60">
         <div className="flex items-center bg-[#EAF1FB] px-2 py-3 rounded-full">
-          <CiSearch size={"24px"} className="text-gray-700" />
+          <CiSearch size={"24px"} className="text-gray-700 hover:cursor-pointer" />
           <input
             type="text"
             placeholder="Search Email"
