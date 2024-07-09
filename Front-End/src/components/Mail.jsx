@@ -56,6 +56,24 @@ const Mail = () => {
           <MdOutlineKeyboardArrowRight size={"22px"} />
         </div>
       </div>
+      <div className="h-[90vh] overflow-y-auto p-4">
+        <div className="flex justify-between items-center bg-white gap-1">
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl font-medium">Subject</h1>
+            <span className="text-gray-700 text-sm bg-gray-200 px-2 rounded-md">inbox</span>
+          </div>
+          <div>
+            <p className="text-gray-500 text-sm">1hr ago</p>
+          </div>
+        </div>
+        <div>
+          <h1 className="text-sm">dayyanshaikh20@gamil.com</h1>
+          <span>to me</span>
+        </div>
+        <div className="my-10">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore at iusto similique voluptas rem minima.</p>
+        </div>
+      </div>
     </div>
   );
 };

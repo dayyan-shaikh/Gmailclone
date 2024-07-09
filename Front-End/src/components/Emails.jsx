@@ -11,6 +11,9 @@ const Emails = () => {
       <Email />
       <Email />
       <Email />
+      <Email />
+      <Email />
+      <Email />
     </div>
   );
 }

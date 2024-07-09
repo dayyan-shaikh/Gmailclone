@@ -9,7 +9,7 @@ import { MdInbox } from "react-icons/md";
 import { IoMdRefresh } from "react-icons/io";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GoTag } from "react-icons/go";
-import Emails from './Emails'
+import Emails from "./Emails";
 
 const mailType = [
   {
@@ -27,8 +27,7 @@ const mailType = [
 ];
 
 const Inbox = () => {
-    
-    const [selected,setselected]=useState(0);
+  const [selected, setselected] = useState(0);
 
   return (
     <div className="flex-1 bg-white rounded-xl mx-5">
@@ -61,14 +60,21 @@ const Inbox = () => {
         <div className="flex items-center gap-1">
           {mailType.map((item, index) => {
             return (
-              <button onClick={()=> setselected(index)} className={`${selected == index ? "border-b-4 border-b-blue-400 text-blue-400" : "border-b-4 border-b-transparent"} flex items-center gap-5 px-4 py-5 w-52 hover:bg-gray-100`}>
+              <button
+                onClick={() => setselected(index)}
+                className={`${
+                  selected == index
+                    ? "border-b-4 border-b-blue-400 text-blue-400"
+                    : "border-b-4 border-b-transparent"
+                } flex items-center gap-5 px-4 py-5 w-52 hover:bg-gray-100`}
+              >
                 {item.icons}
                 <span>{item.text}</span>
               </button>
             );
           })}
         </div>
-      <Emails/>
+        <Emails />
       </div>
     </div>
   );
