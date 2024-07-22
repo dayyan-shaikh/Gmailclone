@@ -13,10 +13,12 @@ export const register = async (req,res) => {
         if(user) return res.status(400).json({message:"email already exists",success:false});
 
         const handlepassword = await bcrypt.hash(password,10)
+        const profilePhoto = `https://avatar.iran.liara.run/public/boy`
         await User.Create({
             fullname,
             email,
-            passwrod:handlepassword
+            passwrod:handlepassword,
+            profilePhoto
         })
 
         return res.status.json({
@@ -46,7 +48,7 @@ export const login = async (req,res) => {
         const tokenData = {
             userId:user._id
         }
-        const token = await jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn:"1d"})
+        const token = jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn:"1d"})
         return res.status(200).cookie("token",token,{maxAge:1*24*60*1000,httpOnly:true,sameSite:"strict"}).json({message:`${user.fullname} logged in successfully.`})
 
     } catch (error) {
