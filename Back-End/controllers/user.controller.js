@@ -14,14 +14,14 @@ export const register = async (req,res) => {
 
         const handlepassword = await bcrypt.hash(password,10)
         const profilePhoto = `https://avatar.iran.liara.run/public/boy`
-        await User.Create({
+        await User.create({
             fullname,
             email,
             passwrod:handlepassword,
             profilePhoto
         })
 
-        return res.status.json({
+        return res.status(201).json({
             message:"Account created succesfully",
             success:true
         });
@@ -51,6 +51,16 @@ export const login = async (req,res) => {
         const token = jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn:"1d"})
         return res.status(200).cookie("token",token,{maxAge:1*24*60*1000,httpOnly:true,sameSite:"strict"}).json({message:`${user.fullname} logged in successfully.`})
 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const logout = async (req,res) => {
+    try {
+        return res.status(200).cookie("token","",{maxAge:0}).json({
+            message:"logged out succesfully."
+        })
     } catch (error) {
         console.log(error);
     }
