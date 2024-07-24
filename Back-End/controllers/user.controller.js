@@ -17,7 +17,7 @@ export const register = async (req,res) => {
         await User.create({
             fullname,
             email,
-            passwrod:handlepassword,
+            password:handlepassword,
             profilePhoto
         })
 
@@ -31,26 +31,27 @@ export const register = async (req,res) => {
     }
 }
 
-export const login = async (req,res) => {
+export const login = async(req,res)=>{
     try {
-        const {email,password} = req.body;
-        
-        if(!email || !password) return res.status(400).json({message:"All fields are required",success:false})
-            
+        const {email, password} = req.body;
+        if(!email || !password) return res.status(400).json({message:"All fields are required", success:false});
+
         const user = await User.findOne({email});
+        console.log(user);
 
-        if(!user) return res.status(400).json({message:"Incorrect email or password",success:false});
-
-        const ispassword = bcrypt.compare(password, user.password);
-
-        if(!ispassword) return res.status(400).json({message:"Incorrect email or password",success:false});
+        if(!user) return res.status(401).json({message:"Incorrect email or password", success:false});
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if(!isPasswordMatch) return res.status(401).json({message:"Incorrect email or password", success:false});
 
         const tokenData = {
             userId:user._id
         }
-        const token = jwt.sign(tokenData, process.env.SECRET_KEY,{expiresIn:"1d"})
-        return res.status(200).cookie("token",token,{maxAge:1*24*60*1000,httpOnly:true,sameSite:"strict"}).json({message:`${user.fullname} logged in successfully.`})
-
+        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {expiresIn:'1d'});
+        return res.status(200).cookie("token", token, {maxAge:1*24*60*60*1000, httpOnly:true, sameSite:'strict'}).json({
+            message:`${user.fullname} logged in successfully.`,
+            user,
+            success:true
+        })
     } catch (error) {
         console.log(error);
     }
