@@ -5,10 +5,10 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { TbGridDots } from "react-icons/tb";
 import Avatar from "react-avatar";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user = false;
-
+  const {user} = useSelector(store => store.app);
   return (
     <div className="flex items-center justify-between mx-3 h-16">
       <div className="flex items-center gap-10 px-5">
@@ -50,7 +50,7 @@ const Navbar = () => {
               <TbGridDots size={"24px"} />
             </div>
             <Avatar
-              src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?size=626&ext=jpg&ga=GA1.1.426541757.1691821798&semt=sph"
+              src={user.profilePhoto}
               size="45"
               round={true}
             />

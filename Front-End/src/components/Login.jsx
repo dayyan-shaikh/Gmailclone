@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useDispatch } from "react-redux"
+import { setAuthUser } from "../redux/appSlice";
 
 const Login = () => {
   const [input, setinput] = useState({
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
 
   const changehandler = (e) => {
     setinput({ ...input, [e.target.name]: e.target.value });
@@ -17,6 +21,7 @@ const Login = () => {
 
   const submithandler = async (e) => {
     e.preventDefault();
+    console.log(input);
     try {
       const res = await axios.post(
         "http://localhost:8080/api/v1/user/login",
@@ -29,6 +34,7 @@ const Login = () => {
         }
       );
       if (res.data.success) {
+        dispatch(setAuthUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
@@ -49,7 +55,7 @@ const Login = () => {
           value={input.email}
           name="email"
           type="email"
-          placeholder="Name"
+          placeholder="Email"
           className="border border-gray-400 rounded-md px-2 py-2"
         />
         <input
@@ -70,7 +76,7 @@ const Login = () => {
           Don't have an account?
           <Link to={"/signup"} className="text-blue-700">
             Signup
-          </Link>
+          </Link> 
         </p>
       </form>
     </div>
