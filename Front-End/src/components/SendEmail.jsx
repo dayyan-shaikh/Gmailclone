@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpen } from '../redux/appSlice';
+import toast from "react-hot-toast";
+import axios from "axios";
+import { string } from 'i/lib/util';
 
 const SendEmail = () => {
- 
+  
   const {open} = useSelector((store=>store.app));
   const dispatch = useDispatch();
+
+  const [formdata,setformdata]=useState({
+    to:"",
+    subject:"",
+    message:""
+  });
+
+  const changehandler = (e) => {
+    setformdata({...formdata,[e.target.name]:e.target.value});
+  }
+
+  const submithandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:8080/api/v1/email/create",formdata,{
+        headers:{
+          "Content-Type":"application/json"
+        },
+        withCredentials:true
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message)
+    }
+    dispatch(setOpen(false));
+  }
 
   return (
     <div className={` ${open ? 'block' : 'hidden'} bg-white max-w-6xl shadow-xl shadow-slate-600 rounded-t-md`}>
@@ -16,10 +46,11 @@ const SendEmail = () => {
         <RxCross2 />
         </div>
       </div>
-      <form className='flex flex-col p-2 gap-2'>
-        <input type="text" placeholder='To' className='outline-none py-1'/>
-        <input type="text" placeholder='Subject' className='outline-none py-1'/>
-        <textarea cols={30} rows={10} className='outline-none'></textarea>
+      <form onSubmit={submithandler} className='flex flex-col p-2 gap-2'>
+        <input onChange={changehandler} value={formdata.to} name='to' type="text" placeholder='To' className='outline-none py-1'/>
+        <input onChange={changehandler} value={formdata.subject} name='subject' type="text" placeholder='Subject' className='outline-none py-1'/>
+        <textarea onChange={changehandler} value={formdata.message} name='message' cols={30} rows={10} className='outline-none'></textarea>
+        <button type='submit' className='mb-3 w-28 text-lg bg-blue-700 px-2 py-1 rounded-full text-white'>send</button>
       </form>
     </div>
   )
