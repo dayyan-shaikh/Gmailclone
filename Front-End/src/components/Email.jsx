@@ -1,13 +1,16 @@
 import React from 'react'
 import { FaRegSquare } from "react-icons/fa";
 import { IoIosStarOutline } from "react-icons/io";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import { setSelectedEmails } from '../redux/appSlice';
 
-const Email = () => {
-
+const Email = ({email}) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const openMail = () => {
-    navigate("/mail/1234");
+    dispatch(setSelectedEmails(email))
+    navigate(`/mail/${email._id}`);
   }
 
   return (
@@ -20,7 +23,7 @@ const Email = () => {
           <IoIosStarOutline size={'15px'} />
         </div>
         <div>
-          <h1 className='font-semibold'>Internships</h1>
+          <h1 className='font-semibold'>{email?.subject}</h1>
         </div>
       </div>
 
@@ -28,7 +31,7 @@ const Email = () => {
         <IoIosStarOutline />
       </div> */}
       <div className='flex-1 ml-4'>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, unde.</p>
+        <p>{email?.message}</p>
       </div>
       <div className='font-bold flex-none'>
         <p>11:20 PM</p>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from 'react-redux';
-import { setOpen } from '../redux/appSlice';
+import { setEmails, setOpen } from '../redux/appSlice';
 import toast from "react-hot-toast";
 import axios from "axios";
 import { string } from 'i/lib/util';
 
 const SendEmail = () => {
   
-  const {open} = useSelector((store=>store.app));
+  const {open,emails} = useSelector((store=>store.app));
   const dispatch = useDispatch();
 
   const [formdata,setformdata]=useState({
@@ -30,7 +30,7 @@ const SendEmail = () => {
         },
         withCredentials:true
       });
-      console.log(res.data);
+      dispatch(setEmails([...emails, res.data.email]))
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message)

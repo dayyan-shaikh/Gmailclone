@@ -30,7 +30,7 @@ export const deleteEmail = async (req,res) => {
 
         if(!emailId) return res.status(400).json({message:"Email id is required."})
 
-        const email = await Email.findOneAndDelete(emailId)
+        const email = await Email.findByIdAndDelete(emailId)
 
         if(!email) return res.status(404).json({message:"Email is required."})
 
