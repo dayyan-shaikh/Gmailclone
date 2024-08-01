@@ -1,6 +1,6 @@
 import React from "react";
 import { IoMdArrowBack, IoMdMore } from "react-icons/io";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiArchiveIn } from "react-icons/bi";
 import { MdOutlineAddTask, MdOutlineDriveFileMove, MdOutlineEmail , MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight, MdOutlineReport, MdOutlineWatchLater } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
@@ -14,11 +14,16 @@ const Mail = () => {
   const params = useParams()
   const deletehandler = async () => {
     try {
-      const res = await axios.delete(`http://localhost:8080/api/v1/email/${params.id}`,{withCredentials:true})
-      toast.success(res.data.message);
-      navigate("/")
+      const res = await axios.delete(`http://localhost:8080/api/v1/email/${params.id}`, { withCredentials: true });
+      if (res.status === 200) {
+        toast.success(res.data.message);
+        navigate("/");
+      } else {
+        throw new Error("Failed to delete email");
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error deleting email:", error);
+      toast.error("Failed to delete email");
     }
   }
   return (
