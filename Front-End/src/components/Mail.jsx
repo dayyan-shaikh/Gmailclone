@@ -12,9 +12,11 @@ const Mail = () => {
   const navigate = useNavigate();
   const {SelectedEmail} = useSelector(store=>store.app)
   const params = useParams()
+  
+  
   const deletehandler = async () => {
     try {
-      const res = await axios.delete(`http://localhost:8080/api/v1/email/${params.id}`, { withCredentials: true });
+      const res = await axios.delete(`http://localhost:8080/api/v1/email/${params.mailId}`, { withCredentials: true });
       if (res.status === 200) {
         toast.success(res.data.message);
         navigate("/");

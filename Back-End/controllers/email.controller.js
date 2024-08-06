@@ -26,8 +26,9 @@ export const createEmail = async (req,res) => {
 
 export const deleteEmail = async (req,res) => {
     try {
-        const emailId = req.params._id
-
+        
+        const emailId = req.params.id
+        
         if(!emailId) return res.status(400).json({message:"Email id is required."})
 
         const email = await Email.findByIdAndDelete(emailId)
