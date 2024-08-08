@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CiSearch } from "react-icons/ci";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { TbGridDots } from "react-icons/tb";
 import Avatar from "react-avatar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {setSearchText} from "../redux/appSlice"
 
 const Navbar = () => {
+  const [text,setText] = useState("");
   const {user} = useSelector(store => store.app);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(setSearchText(text))
+  },[text]);
   return (
     <div className="flex items-center justify-between mx-3 h-16">
       <div className="flex items-center gap-10 px-5">
@@ -34,6 +40,8 @@ const Navbar = () => {
               />
               <input
                 type="text"
+                value={text}
+                onChange={(e)=>setText(e.target.value)}
                 placeholder="Search mail"
                 className="rounded-full w-full bg-transparent outline-none px-1"
               />
