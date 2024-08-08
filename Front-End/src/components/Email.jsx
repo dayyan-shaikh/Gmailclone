@@ -33,8 +33,8 @@ const Email = ({email}) => {
       <div className='flex-1 ml-4'>
         <p>{email?.message}</p>
       </div>
-      <div className='font-bold flex-none'>
-        <p>11:20 PM</p>
+      <div className='flex-none'>
+        <p>{email?.createdAt}</p>
       </div>
     </div>
   )

@@ -13,9 +13,10 @@ const Emails = () => {
     const filteredEmail = emails.filter((email)=>{
       return email.subject.toLowerCase().includes(SearchText.toLowerCase()) || email.to.toLowerCase().includes(SearchText.toLowerCase()) || email.message.toLowerCase().includes(SearchText.toLowerCase())
     })
-  },[])
+    setfilterEmail(filteredEmail)
+  },[SearchText,emails])
 
-  return <div>{emails && emails?.map((email) => <Email key={email._id} email={email}/> )}</div>;
+  return <div>{filterEmail && filterEmail?.map((email) => <Email key={email._id} email={email}/> )}</div>;
 };
 
 export default Emails;
