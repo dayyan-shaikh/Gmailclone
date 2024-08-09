@@ -6,12 +6,26 @@ import { IoMdSettings } from "react-icons/io";
 import { TbGridDots } from "react-icons/tb";
 import Avatar from "react-avatar";
 import { useDispatch, useSelector } from "react-redux";
-import {setSearchText} from "../redux/appSlice"
+import {setAuthUser, setSearchText} from "../redux/appSlice"
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [text,setText] = useState("");
   const {user} = useSelector(store => store.app);
   const dispatch = useDispatch();
+  const logouthandler = async () => {
+    try {
+      const res = await axios.get('http://localhost:8080/api/v1/user/logout');
+      console.log(res);
+      toast.success(res.data.message)
+      dispatch(setAuthUser(null))
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   useEffect(()=>{
     dispatch(setSearchText(text))
   },[text]);
@@ -57,6 +71,7 @@ const Navbar = () => {
             <div className="p-3 rounded-full hover:bg-gray-200">
               <TbGridDots size={"24px"} />
             </div>
+            <span onClick={logouthandler} className="underline cursor-pointer">Logout</span>
             <Avatar
               src={user.profilePhoto}
               size="45"
