@@ -40,11 +40,11 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.success(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
   return (
-    <div className="flex items-center justify-center w-screen mt-10">
+    <div className="flex items-center justify-center w-screen h-screen">
       <form
         onSubmit={submithandler}
         className="flex flex-col gap-3 bg-white p-4 w-[25%] rounded-md"
